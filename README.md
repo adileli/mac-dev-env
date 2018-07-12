@@ -187,3 +187,15 @@ npm install -g yarn
 npm config set registry https://registry.npm.taobao.org
 yarn config set registry https://registry.npm.taobao.org
 ```
+
+配置ssh一键登录
+脚本
+```
+#!/usr/bin/expect
+spawn ssh -p[PORT] [IP]
+expect "*password:"
+send "[PASSWORD]\r"
+expect "*#"
+interact
+```
+放到bin目录下，应用bash。
