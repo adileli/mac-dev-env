@@ -47,22 +47,22 @@ export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:~/.com
 ### [Homebrew](brew.sh)
 
 ### PHP
-添加PHP仓库
-```
-brew tap homebrew/dupes
-brew tap homebrew/versions
-brew tap homebrew/homebrew-php
-```
 
 安装PHP7.1
 ```
-brew install php71
+brew install php@7.1
 ```
 
 启动关闭PHP
 ```
 sudo php71-fpm start
 sudo php71-fpm stop
+```
+
+```
+brew services start php@7.1
+brew services stop php@7.1
+brew services restart php@7.1
 ```
 
 ### 安装nginx
@@ -91,7 +91,6 @@ events {
     worker_connections  1024;
 }
 
-
 http {
     include       mime.types;
     default_type  application/octet-stream;
@@ -113,7 +112,7 @@ http {
         root         /var/www;
         charset      utf-8;
 
-        #access_log  logs/host.access.log  main;
+        access_log  logs/host.access.log  main;
 
         location / {
             autoindex on;
@@ -129,27 +128,7 @@ http {
         }
 
     }
-
-    # HTTPS server
-    #
-    #server {
-    #    listen       443 ssl;
-    #    server_name  localhost;
-
-    #    ssl_certificate      cert.pem;
-    #    ssl_certificate_key  cert.key;
-
-    #    ssl_session_cache    shared:SSL:1m;
-    #    ssl_session_timeout  5m;
-
-    #    ssl_ciphers  HIGH:!aNULL:!MD5;
-    #    ssl_prefer_server_ciphers  on;
-
-    #    location / {
-    #        root   html;
-    #        index  index.html index.htm;
-    #    }
-    #}
+    
     include servers/*;
 }
 ```
@@ -161,15 +140,28 @@ sudo nginx -s reload
 sudo nginx -s stop
 ```
 
+```
+brew services start nginx
+brew services stop nginx
+brew services restart nginx
+```
+
 ### 安装mysql
 ```
-brew install mysql
+brew install mysql@5.6
 ```
 
 启动关闭mysql
 ```
+需要将mysql可执行文件放到bin目录
 mysql.server start
 mysql.server stop
+```
+
+```
+brew services start mysql@5.6
+brew services stop mysql@5.6
+brew services restart mysql@5.6
 ```
 
 ### 安装node
